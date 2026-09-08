@@ -15,10 +15,15 @@ namespace app {
         auto cam      = graphics->camera();
         cam->Position = glm::vec3(0.0f, 3.0f, 12.0f);
         cam->Yaw      = -90.0f;
-        cam->Pitch    = 0.0f;
+        cam->Pitch    = -10.0f;
 
         m_cursor_enabled = false;
         platform->set_enable_cursor(false);
+
+        auto resources     = engine::core::Controller::get<engine::resources::ResourcesController>();
+        auto skybox_shader = resources->shader("skybox");
+        skybox_shader->use();
+        skybox_shader->set_int("skybox", 0);
     }
 
     bool MainController::loop() {
@@ -71,6 +76,11 @@ namespace app {
 
     void MainController::draw() {
         draw_scene();
+
+        auto graphics  = engine::core::Controller::get<engine::graphics::GraphicsController>();
+        auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
+        graphics->draw_skybox(resources->shader("skybox"),
+                              resources->skybox("skybox", "app/resources/skyboxes/skybox"));
     }
 
     void MainController::end_draw() {
