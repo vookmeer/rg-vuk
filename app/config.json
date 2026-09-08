@@ -17,6 +17,10 @@
       "hanginglight": {
         "path": "hanginglight/HangingLight/HangingLight.obj",
         "flip_uvs": false
+      },
+      "floor": {
+        "path": "floor/floor.obj",
+        "flip_uvs": false
       }
     }
   }

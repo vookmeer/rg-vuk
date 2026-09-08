@@ -126,7 +126,7 @@ namespace app {
         {
             auto motorbike = resources->model("motorbike");
             glm::mat4 model_matrix(1.0f);
-            model_matrix = glm::translate(model_matrix, glm::vec3(3.0f, -2.8f, -5.0f));
+            model_matrix = glm::translate(model_matrix, glm::vec3(7.0f, -2.8f, -5.0f));
             model_matrix = glm::scale(model_matrix, glm::vec3(0.004f));
             shader->set_mat4("model", model_matrix);
             motorbike->draw(shader);
@@ -139,6 +139,34 @@ namespace app {
             model_matrix = glm::scale(model_matrix, glm::vec3(6.0f));
             shader->set_mat4("model", model_matrix);
             hanginglight->draw(shader);
+        }
+        // Pod
+        {
+            auto floor_shader = resources->shader("floor");
+            floor_shader->use();
+            floor_shader->set_mat4("projection", graphics->projection_matrix());
+            floor_shader->set_mat4("view", graphics->camera()->view_matrix());
+            floor_shader->set_vec3("viewPos", graphics->camera()->Position);
+
+            floor_shader->set_vec3("dirLight.direction", m_dir_light.direction);
+            floor_shader->set_vec3("dirLight.ambient", m_dir_light.ambient);
+            floor_shader->set_vec3("dirLight.diffuse", m_dir_light.diffuse);
+            floor_shader->set_vec3("dirLight.specular", m_dir_light.specular);
+
+            floor_shader->set_vec3("pointLight.position", m_point_light.position);
+            floor_shader->set_float("pointLight.constant", m_point_light.constant);
+            floor_shader->set_float("pointLight.linear", m_point_light.linear);
+            floor_shader->set_float("pointLight.quadratic", m_point_light.quadratic);
+            floor_shader->set_vec3("pointLight.ambient", m_point_light.ambient);
+            floor_shader->set_vec3("pointLight.diffuse", m_point_light.diffuse);
+            floor_shader->set_vec3("pointLight.specular", m_point_light.specular);
+
+            auto floor = resources->model("floor");
+            glm::mat4 model_matrix(1.0f);
+            model_matrix = glm::translate(model_matrix, glm::vec3(-100.0f, -0.1f, -100.0f));
+            model_matrix = glm::scale(model_matrix, glm::vec3(200.0f, 0.1f, 200.0f));
+            floor_shader->set_mat4("model", model_matrix);
+            floor->draw(floor_shader);
         }
     }
 
