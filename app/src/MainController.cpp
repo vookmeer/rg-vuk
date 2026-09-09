@@ -59,10 +59,26 @@ namespace app {
             engine::platform::Key::State::Pressed) {
             m_dir_light.diffuse = glm::clamp(m_dir_light.diffuse - glm::vec3(0.01f), glm::vec3(0.0f), glm::vec3(1.5f));
         }
+        if (platform->key(engine::platform::KeyId::KEY_SPACE).state() == engine::platform::Key::State::JustPressed) {
+            m_sequence_running = !m_sequence_running;
+        }
     }
 
     void MainController::update() {
         update_camera();
+        auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
+        if (m_sequence_running) {
+            float dt              = platform->dt();
+            constexpr float speed = 1.0f;
+
+            m_sequence_time            += dt;
+            m_motorbike_event_offset.z += m_motorbike_move_dir * speed * dt;
+
+            if (m_sequence_time >= 3.0f) {
+                m_sequence_time      = 0.0f;
+                m_motorbike_move_dir *= -1.0f;
+            }
+        }
     }
 
     void MainController::begin_draw() {
@@ -116,7 +132,7 @@ namespace app {
         {
             auto motorbike = resources->model("motorbike");
             glm::mat4 model_matrix(1.0f);
-            model_matrix = glm::translate(model_matrix, glm::vec3(7.0f, -2.8f, -5.0f));
+            model_matrix = glm::translate(model_matrix, glm::vec3(7.0f, -2.8f, -5.0f) + m_motorbike_event_offset);
             model_matrix = glm::scale(model_matrix, glm::vec3(0.004f));
             shader->set_mat4("model", model_matrix);
             motorbike->draw(shader);

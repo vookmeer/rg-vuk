@@ -54,6 +54,10 @@ namespace app {
         PointLightData m_point_light;
         float m_shininess{32.0f};
         bool m_warm_light{true};
+        bool m_sequence_running{false};
+        float m_sequence_time{0.0f};
+        float m_motorbike_move_dir{1.0f};
+        glm::vec3 m_motorbike_event_offset{0.0f};
     };
 } // namespace app
 #endif//MAINCONTROLLER_HPP
