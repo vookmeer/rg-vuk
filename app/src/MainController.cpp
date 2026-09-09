@@ -198,7 +198,7 @@ namespace app {
         if (!m_cursor_enabled) {
             if (!m_mouse_initialized) {
                 if (mouse.dx != 0.0f || mouse.dy != 0.0f) {
-                    m_mouse_initialized = true; // preskoci prvi skok nakon "hvatanja" kursora
+                    m_mouse_initialized = true;
                 }
             } else {
                 camera->rotate_camera(mouse.dx, mouse.dy);
