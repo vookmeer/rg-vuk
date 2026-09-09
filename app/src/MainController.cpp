@@ -141,8 +141,8 @@ namespace app {
         {
             auto hanginglight = resources->model("hanginglight");
             glm::mat4 model_matrix(1.0f);
-            model_matrix = glm::translate(model_matrix, glm::vec3(1.5f, 8.0f, -5.0f));
-            model_matrix = glm::scale(model_matrix, glm::vec3(6.0f));
+            model_matrix = glm::translate(model_matrix, glm::vec3(5.5f, 10.0f, -5.0f));
+            model_matrix = glm::scale(model_matrix, glm::vec3(15.0f));
             shader->set_mat4("model", model_matrix);
             hanginglight->draw(shader);
         }
