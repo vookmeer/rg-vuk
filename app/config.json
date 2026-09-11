@@ -1,11 +1,27 @@
 {
-  "resources": {
-    "models": {
-    }
-  },
   "window": {
     "height": 600,
-    "title": "Hello, window!",
+    "title": "RG",
     "width": 800
+  },
+  "resources": {
+    "models": {
+      "car": {
+        "path": "car/Lamborghini_Aventador.obj",
+        "flip_uvs": false
+      },
+      "motorbike": {
+        "path": "motorbike/Bike.obj",
+        "flip_uvs": false
+      },
+      "hanginglight": {
+        "path": "hanginglight/HangingLight/HangingLight.obj",
+        "flip_uvs": false
+      },
+      "floor": {
+        "path": "floor/floor.obj",
+        "flip_uvs": false
+      }
+    }
   }
 }
